@@ -8,6 +8,8 @@ for (let i=0; i<256; i++) {
     container.appendChild(div);
 }
 
+const grids = document.querySelectorAll(".grid");
+
 function gridListen(){
     const grids = document.querySelectorAll(".grid");
 
@@ -15,7 +17,7 @@ function gridListen(){
         let r = Math.floor(Math.random() * 256);
         let g = Math.floor(Math.random() * 256);
         let b = Math.floor(Math.random() * 256);
-        grid.addEventListener("mouseover", function(e) {
+        grid.addEventListener("mouseover", function(evt) {
             console.log("Hello!");
             
             if(isMouseDown){
@@ -23,11 +25,36 @@ function gridListen(){
                 let g = Math.floor(Math.random() * 256);
                 let b = Math.floor(Math.random() * 256);
                     //e.target.classList.add("hover");
-                e.target.style.backgroundColor = `rgb(${r},${g},${b})`;
+                evt.target.style.backgroundColor = `rgb(${r},${g},${b})`;
             }
         });
     });
 }
+
+const black = document.querySelector(".black");
+
+black.addEventListener("click", function(e) {
+    const grids = document.querySelectorAll(".grid");
+
+    grids.forEach(function(gid){
+        //gid.replaceWith(gid.cloneNode(true));
+
+        gid.addEventListener("mouseover", function(event) {
+            if(isMouseDown){
+                event.target.style.backgroundColor = "black";
+            }
+        });
+    });
+
+});
+
+const rainbow = document.querySelector(".rainbow");
+
+rainbow.addEventListener("click", function(e) {
+    const grids = document.querySelectorAll(".grid");
+
+    gridListen();
+});
 
 const body = document.querySelector("body");
 let isMouseDown = false;
@@ -60,6 +87,7 @@ pixels.addEventListener("click", function(e) {
         container.appendChild(div);
     }
     gridListen();
+    const grids = document.querySelectorAll(".grid");
 });
 
 const reset = document.querySelector(".reset");
@@ -75,6 +103,7 @@ reset.addEventListener("click", function(e) {
         container.appendChild(div);
     }
     gridListen();
+    const grids = document.querySelectorAll(".grid");
 });
 
 gridListen();
